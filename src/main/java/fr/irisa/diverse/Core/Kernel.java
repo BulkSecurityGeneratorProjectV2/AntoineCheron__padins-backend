@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -287,7 +288,7 @@ public class Kernel {
 
         try {
             // Write the bash script that will start the container
-            script = File.createTempFile("script", null);
+            script = Files.createTempFile("script", null).toFile();
             Writer streamWriter = new OutputStreamWriter(new FileOutputStream(script));
             PrintWriter printWriter = new PrintWriter(streamWriter);
             printWriter.println("#!/bin/bash");
@@ -333,7 +334,7 @@ public class Kernel {
 
         try {
             // Write the bash script that will stop the running container
-            script = File.createTempFile("script-stop", null);
+            script = Files.createTempFile("script-stop", null).toFile();
             Writer streamWriter = new OutputStreamWriter(new FileOutputStream(script));
             PrintWriter printWriter = new PrintWriter(streamWriter);
             printWriter.println("#!/bin/bash");
